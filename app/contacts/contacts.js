@@ -85,4 +85,49 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
 		$scope.zipcode = '';
 	}
 
+	//Show Contact
+	$scope.showContact = function(contact) {
+		console.log(contact);
+		$scope.name = contact.name;
+		$scope.email = contact.email;
+		$scope.company = contact.company;
+		$scope.work_phone = contact.phones[0].work;
+		$scope.home_phone = contact.phones[0].home;
+		$scope.mobile_phone = contact.phones[0].mobile;
+		$scope.street_address = contact.addres[0].street_address;
+		$scope.state = contact.addres[0].state;
+		$scope.city = contact.addres[0].city;
+		$scope.zipcode = contact.addres[0].zipcode;
+		$scope.contactShow = true;
+
+	}
+
+	//Show/Hidr Edit Form
+	$scope.editFormShow = false;
+	$scope.showEditForm = function(contact) {
+		console.log('Opening Edit Form');
+		
+		//Set values in Edit Form
+		$scope.editFormShow = true;
+		$scope.name = contact.name;
+		$scope.email = contact.email;
+		$scope.company = contact.company;
+		$scope.work_phone = contact.phones[0].work;
+		$scope.home_phone = contact.phones[0].home;
+		$scope.mobile_phone = contact.phones[0].mobile;
+		$scope.street_address = contact.addres[0].street_address;
+		$scope.state = contact.addres[0].state;
+		$scope.city = contact.addres[0].city;
+		$scope.zipcode = contact.addres[0].zipcode;
+
+	}
+
+	//Edit Contact Submit
+	$scope.editFormSubmit = function() {
+		console.log('Editing the contact');
+
+		var id = $scope.id;
+		var record = 
+	}
+
 }]);
