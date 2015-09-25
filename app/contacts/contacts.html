@@ -180,7 +180,7 @@
 				</div>
 			</form>
 	
-		<h3>Your Contacts</h3>
+		<h3>Your Contacts ({{contacts.length}})</h3>
 		<table>
 			<thead>
 				<tr>
@@ -203,6 +203,7 @@
 	</div>
 	<div class="small-12 large-2 columns">
 		<a class="button large" ng-click="showAddForm()">{{addFormShow ? '-' : '+'}}</a>
-		<a class="button large" ng-click="contactShow = false">-</a>
+		<a class="button large" ng-show="contactShow" ng-click="contactShow = false">-</a>
+		<a class="button large" ng-show="editFormShow" ng-click="editFormShow = false">-</a>
 	</div>
 </div>

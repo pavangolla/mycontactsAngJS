@@ -106,7 +106,7 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
 	$scope.editFormShow = false;
 	$scope.showEditForm = function(contact) {
 		console.log('Opening Edit Form');
-		
+		$scope.id = contact.$id;
 		//Set values in Edit Form
 		$scope.editFormShow = true;
 		$scope.name = contact.name;
@@ -119,7 +119,6 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
 		$scope.state = contact.addres[0].state;
 		$scope.city = contact.addres[0].city;
 		$scope.zipcode = contact.addres[0].zipcode;
-
 	}
 
 	//Edit Contact Submit
@@ -127,7 +126,39 @@ angular.module('myContacts.contacts', ['ngRoute', 'firebase'])
 		console.log('Editing the contact');
 
 		var id = $scope.id;
-		var record = 
+		var record = $scope.contacts.$getRecord(id);
+		record.name = $scope.name;
+		record.email = $scope.email;
+		record.company = $scope.company;
+		record.phones[0].work = $scope.work_phone;
+		record.phones[0].home = $scope.home_phone;
+		record.phones[0].mobile = $scope.mobile_phone;
+		record.addres[0].street_address = $scope.street_address;
+		record.addres[0].city = $scope.city;
+		record.addres[0].state = $scope.state;
+		record.addres[0].zipcode = $scope.zipcode;
+
+		//Save Contact
+		$scope.contacts.$save(record).then(function(ref) {
+			console.log(ref.key);
+		});
+
+		clearfields();
+
+		//Hide Edit Form
+		$scope.editFormShow = false;
+
+		$scope.msg = 'Contact updated';
+
+	}
+
+	//REmove Contact
+	$scope.removeContact = function(contact) {
+		console.log('Removing Contact');
+
+		$scope.contacts.$remove(contact);
+
+		$scope.msg = "Contact Removed";
 	}
 
 }]);
